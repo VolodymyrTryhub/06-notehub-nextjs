@@ -1,22 +1,30 @@
-// app/layout.tsx
+import type { Metadata } from 'next';
+
+import './globals.css';
 
 import Header from '@/components/Header/Header';
-import TanStackProvider from '@/components/TanStackProvider/TanStackProvider.jsx';
+import Footer from '@/components/Footer/Footer';
+import TanStackProvider from '@/components/TanStackProvider/TanStackProvider';
 
-// інший код файлу
+export const metadata: Metadata = {
+  title: 'NoteHub',
+  description: 'Notes application',
+};
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en">
       <body>
         <TanStackProvider>
           <Header />
+
           <main>{children}</main>
-          <footer>
-            <p>
-              Created <time dateTime="2025">2025</time>
-            </p>
-          </footer>
+
+          <Footer />
         </TanStackProvider>
       </body>
     </html>

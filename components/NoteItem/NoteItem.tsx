@@ -1,7 +1,7 @@
 // components/NoteItem/NoteItem.tsx
 
 import Link from 'next/link';
-import { Note } from '@/lib/api';
+import { Note } from '@/types/note';
 
 type Props = {
   item: Note;
@@ -10,7 +10,7 @@ type Props = {
 const NoteItem = ({ item }: Props) => {
   return (
     <li>
-      <Link href={`/notes/${item.id}`}>{item.title}</Link>
+      <Link href={`/notes/${item.id}`}>View details</Link>
     </li>
   );
 };

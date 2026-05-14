@@ -1,13 +1,15 @@
-import css from "./NoteForm.module.css";
+'use client';
 
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import css from './NoteForm.module.css';
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
-import { createNote } from "../../services/noteService";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import type { NoteTag } from "../../types/note";
+import { createNote } from '@/lib/api';
+
+import type { NoteTag } from '@/types/note';
 
 interface NoteFormProps {
   onClose: () => void;
@@ -21,15 +23,13 @@ interface FormValues {
 
 const validationSchema = Yup.object({
   title: Yup.string()
-    .min(3, "Minimum 3 characters")
-    .max(50, "Maximum 50 characters")
-    .required("Required"),
+    .min(3, 'Minimum 3 characters')
+    .max(50, 'Maximum 50 characters')
+    .required('Required'),
 
-  content: Yup.string().max(500, "Maximum 500 characters"),
+  content: Yup.string().max(500, 'Maximum 500 characters'),
 
-  tag: Yup.string()
-    .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"])
-    .required("Required"),
+  tag: Yup.string().oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping']).required('Required'),
 });
 
 function NoteForm({ onClose }: NoteFormProps) {
@@ -40,7 +40,7 @@ function NoteForm({ onClose }: NoteFormProps) {
 
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["notes"],
+        queryKey: ['notes'],
       });
 
       onClose();
@@ -48,16 +48,16 @@ function NoteForm({ onClose }: NoteFormProps) {
   });
 
   const initialValues: FormValues = {
-    title: "",
-    content: "",
-    tag: "Todo",
+    title: '',
+    content: '',
+    tag: 'Todo',
   };
 
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         createMutation.mutate(values);
       }}
     >
@@ -73,13 +73,7 @@ function NoteForm({ onClose }: NoteFormProps) {
         <div className={css.formGroup}>
           <label htmlFor="content">Content</label>
 
-          <Field
-            as="textarea"
-            id="content"
-            name="content"
-            rows={8}
-            className={css.textarea}
-          />
+          <Field as="textarea" id="content" name="content" rows={8} className={css.textarea} />
 
           <ErrorMessage name="content" component="span" className={css.error} />
         </div>
@@ -103,11 +97,7 @@ function NoteForm({ onClose }: NoteFormProps) {
             Cancel
           </button>
 
-          <button
-            type="submit"
-            className={css.submitButton}
-            disabled={createMutation.isPending}
-          >
+          <button type="submit" className={css.submitButton} disabled={createMutation.isPending}>
             Create note
           </button>
         </div>

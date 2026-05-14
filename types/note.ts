@@ -1,14 +1,21 @@
-export type Note = {
+export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+
+export interface Note {
   id: string;
   title: string;
   content: string;
-  categoryId: string;
-  userId: string;
+  tag: NoteTag;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-export type NoteListResponse = {
+export interface NotesResponse {
   notes: Note[];
-  total: number;
-};
+  totalPages: number;
+}
+
+export interface CreateNoteData {
+  title: string;
+  content: string;
+  tag: NoteTag;
+}
