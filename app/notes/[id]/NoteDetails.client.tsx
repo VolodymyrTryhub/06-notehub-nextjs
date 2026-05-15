@@ -19,7 +19,10 @@ const NoteDetailsClient = () => {
     isError,
   } = useQuery({
     queryKey: ['note', id],
+
     queryFn: () => fetchNoteById(id),
+
+    refetchOnMount: false,
   });
 
   if (isLoading) {

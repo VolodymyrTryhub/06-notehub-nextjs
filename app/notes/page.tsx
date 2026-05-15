@@ -8,8 +8,13 @@ const NotesPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['notes'],
-    queryFn: getNotes,
+    queryKey: ['notes', 1, ''],
+
+    queryFn: () =>
+      getNotes({
+        page: 1,
+        search: '',
+      }),
   });
 
   return (
