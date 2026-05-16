@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
     .max(50, 'Maximum 50 characters')
     .required('Required'),
 
-  content: Yup.string().max(500, 'Maximum 500 characters').required('Required'),
+  content: Yup.string().max(500, 'Maximum 500 characters'),
 
   tag: Yup.string().oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping']).required('Required'),
 });

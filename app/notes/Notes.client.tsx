@@ -68,7 +68,7 @@ const NotesClient = () => {
         {data.totalPages > 1 && (
           <Pagination
             pageCount={data.totalPages}
-            forcePage={page - 1}
+            currentPage={page}
             onPageChange={handlePageChange}
           />
         )}
